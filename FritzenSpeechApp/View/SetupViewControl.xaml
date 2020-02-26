@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="FritzenSpeechApp.SetupViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FritzenSpeechApp"
+             xmlns:loc="clr-namespace:FritzenSpeechApp.Lang"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="566" Background="WhiteSmoke">
+    <Grid Margin="10,10,10,0">
+        <!-- left top right botton-->
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="10,0,10,0">
+                <TextBlock FontWeight="Bold" Text="{x:Static loc:Res.setup_section_config}" />
+                <Separator Margin="0,5,0,10" />
+
+                <TextBlock Margin="0,0,0,4" Text="{x:Static loc:Res.setup_shortcut_key}"></TextBlock>
+                <ComboBox  Margin="0,0,0,4" SelectionChanged="ComboBox_SelectionChanged" Name="cboShortcut">
+                    <ComboBoxItem IsSelected="True" Content="F1"/>
+                    <ComboBoxItem IsSelected="False">Ctrl + F1</ComboBoxItem>
+                    <ComboBoxItem Visibility="Hidden" IsSelected="False">Alt + F1</ComboBoxItem>
+                    <ComboBoxItem Visibility="Hidden" IsSelected="False">Shift + F1</ComboBoxItem>
+                </ComboBox>
+
+                <TextBlock Margin="0,0,0,4" Text="{x:Static loc:Res.setup_volume}"/>
+                <Slider Margin="0,0,0,10" Name="sliderVolume" ValueChanged="sliderVolume_ValueChanged" Minimum="0" Maximum="100" />
+ 
+                <TextBlock Margin="0,0,0,4" Text="{x:Static loc:Res.setup_flags}"/>
+                <CheckBox Margin="0,0,0,4" Name="cbFocus" Click="cbFocus_Click" Content="{x:Static loc:Res.setup_focus}" />
+                <CheckBox Margin="0,0,0,4" Name="cbStartupFocus" Click="cbStartupFocus_Click" Content="{x:Static loc:Res.setup_start_minimized}" />
+                <CheckBox Margin="0,0,0,4" Name="cbTryAdjustMixer" Click="CbTryAdjustMixer_Click"  Content="{x:Static loc:Res.setup_audio_mixer}"/>
+                <DockPanel Margin="20,0,0,0" VerticalAlignment="Center">
+                    <Image Source="/FritzenSpeechApp;component/Images/info16.png" Width="16" Height="16" VerticalAlignment="Top"/>
+                    <TextBlock Margin="0,0,0,0" Text="{x:Static loc:Res.setup_audio_mixer_help}" Foreground="Gray" TextWrapping="WrapWithOverflow"/>
+                </DockPanel>
+                <DockPanel Margin="0,20,0,10" >
+                    <StackPanel>
+                        <TextBlock Margin="0,0,0,4" FontWeight="Bold" Text="{x:Static loc:Res.setup_grid_title}"/>
+                        <ListView  VerticalAlignment="Stretch" SelectionMode="Single" HorizontalContentAlignment="Stretch" Margin="0" Name="lvVoices">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="{x:Static loc:Res.setup_grid_voice_name}" Width="200" DisplayMemberBinding="{Binding Voice.Name}" />
+                                    <GridViewColumn Header="{x:Static loc:Res.setup_grid_voice_gender}" Width="55" DisplayMemberBinding="{Binding Voice.Gender}" />
+                                    <GridViewColumn Header="{x:Static loc:Res.setup_grid_voice_language}" Width="140" DisplayMemberBinding="{Binding Voice.Culture.DisplayName}" />
+                                    <GridViewColumn Header="{x:Static loc:Res.setup_grid_voice_speed}" Width="110">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Slider Width="90" Minimum="-10" Maximum="10" Uid="{Binding Voice.Id}" Value="{Binding Rate}" ValueChanged="Slider_ValueChanged" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Button Margin="0,10,0,4"  Name="btnChangeOrder" Click="btnChangeOrder_Click" Content="{x:Static loc:Res.setup_grid_prioritize_selected_voice}"/>
+                    </StackPanel>
+                </DockPanel>
+
+                <TextBlock FontWeight="Bold" Text="{x:Static loc:Res.setup_section_help}"></TextBlock>
+                <Separator Margin="0,5,0,10" />
+                <TextBlock Margin="0,0,0,10" TextWrapping="WrapWithOverflow" Text="{x:Static loc:Res.setup_help_text}"/>
+
+                <Image Margin="0,0,0,20" Cursor="Hand" Source="/FritzenSpeechApp;component/Images/paypal-donate-button.png" Width="150" Stretch="Uniform"  HorizontalAlignment="Left" Name="cmdPaypal" MouseLeftButtonUp="CmdPaypal_MouseLeftButtonUp" />
+
+                <TextBlock>Copyright © 2020 FRITZEN.IO</TextBlock>
+                <TextBlock>
+                    <Hyperlink NavigateUri="http://fritzen.io/speech" RequestNavigate="Hyperlink_RequestNavigate">
+                        http://fritzen.io/speech
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </ScrollViewer>
+
+
+    </Grid>
+</UserControl>
