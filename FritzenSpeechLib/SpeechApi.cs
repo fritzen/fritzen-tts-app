@@ -239,7 +239,7 @@ namespace FritzenSpeech
                 string newMD5 = "";
 
                 string textBeforeCopy = Clipboard.GetText(TextDataFormat.Text);
-
+                Util.Delay(10);
                 clipboardBackup.Backup();
 
                 Util.Delay(5);

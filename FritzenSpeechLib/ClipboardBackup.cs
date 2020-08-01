@@ -41,12 +41,23 @@ namespace FritzenSpeech
             try
             {
                 List<string> formats = data.GetFormats(false).ToList();
-                formats.ForEach(f =>
+
+                foreach(string f in formats)
                 {
+                    /*
+                  * TODO: BUG
+                  * Managed Debugging Assistant 'FatalExecutionEngineError' : 'O tempo de execução encontrou um erro fatal. O endereço do erro é 0xb5252112, no thread 0x22dc. O código do erro é 0xc0000005. Esse erro pode ser um bug no CLR ou nas partes não segura ou não verificável do código do usuário. Origens comuns desse bug incluem erros de marshaling de usuário para COM-interop ou PInvoke, o que pode danificar a pilha.'
+                  *
+                  * System.ExecutionEngineException: 'Exception_WasThrown'
+                  */
+                  if (f.StartsWith("EnhancedMetafile"))
+                    {
+                        continue;
+                    }
                     object clip = data.GetData(f, false);
                     if (clip != null)
                     {
-
+                        Console.WriteLine(f);
                         contents.Add(new ClipboardItem()
                         {
                             Format = f,
@@ -58,7 +69,8 @@ namespace FritzenSpeech
                             ObjectStream = Clipboard.GetAudioStream()
                         });
                     }
-                });
+                }
+
             }
             catch (Exception e)
             {
