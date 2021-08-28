@@ -59,5 +59,14 @@ namespace FritzenSpeech.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream blop {
+            get {
+                return ResourceManager.GetStream("blop", resourceCulture);
+            }
+        }
     }
 }

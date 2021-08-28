@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Media;
 using System.Speech.Synthesis;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,6 +28,8 @@ namespace FritzenSpeech
         public List<VoiceRate> Voices => voices;
         public SpeechSynthesizer api => speech;
         public int Volume => speech.Volume;
+        
+        private SoundPlayer sound;
 
 
         public void SetAudioAuto(bool value)
@@ -155,6 +158,8 @@ namespace FritzenSpeech
 
         public SpeechApi()
         {
+            sound = new SoundPlayer( Resources.blop );
+
             speech.SpeakCompleted += Speech_SpeakCompleted;
             speech.SpeakProgress += Speech_SpeakProgress;
 
@@ -260,20 +265,19 @@ namespace FritzenSpeech
 
                 if (string.IsNullOrEmpty(text) || textBeforeCopy.Equals(text))
                 {
-                    Console.Beep();
-                    new Thread(() => Console.Beep(400, 500)).Start();
 
+                    sound.Play();
 
                     if (state == SynthesizerState.Speaking)
                     {
                         SpeakPause();
+                        return;
                     }
                     if (state == SynthesizerState.Paused)
                     {
                         SpeakResume();
+                        return;
                     }
-
-                    return;
                 }
 
                 Parallel.Invoke(() =>
@@ -289,7 +293,7 @@ namespace FritzenSpeech
                 }, () =>
                 {
                     Debug.WriteLine("Begin Beep task...");
-                    new Thread(() => Console.Beep(400, 500)).Start();
+                    sound.Play();
                     Debug.WriteLine("End Beep task...");
                 }
                     );
