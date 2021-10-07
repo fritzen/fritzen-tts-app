@@ -18,7 +18,7 @@ namespace FritzenSpeech
         private readonly FrmMainTray trayAgent = new FrmMainTray();
         private readonly VolumeMixer mixer = new VolumeMixer();
         private readonly ClipboardBackup clipboardBackup = new ClipboardBackup();
-        private readonly SpeechSynthesizer speech = new SpeechSynthesizer();
+        private SpeechSynthesizer speech = new SpeechSynthesizer();
         private List<VoiceRate> voices = null;
         private int hotkeyIndex = 0;
         private string md5 = "";
@@ -84,6 +84,8 @@ namespace FritzenSpeech
 
         public string SpeakStart(string text, string lang)
         {
+            speech = new SpeechSynthesizer();
+
             SpeakStop();
 
             text = CleanUp(text);
