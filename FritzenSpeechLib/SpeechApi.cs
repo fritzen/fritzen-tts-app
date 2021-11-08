@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Media;
@@ -84,7 +85,6 @@ namespace FritzenSpeech
 
         public string SpeakStart(string text, string lang)
         {
-            speech = new SpeechSynthesizer();
 
             SpeakStop();
 
@@ -162,8 +162,12 @@ namespace FritzenSpeech
         {
             sound = new SoundPlayer( Resources.blop );
 
-            speech.SpeakCompleted += Speech_SpeakCompleted;
+            //speech.SpeakCompleted += Speech_SpeakCompleted;
+            speech.SpeakCompleted += new EventHandler<SpeakCompletedEventArgs>(Speech_SpeakCompleted);
             speech.SpeakProgress += Speech_SpeakProgress;
+            
+
+
 
             trayAgent.SpeechActionFired += TrayAgent_SpeechActionFired;
 
@@ -338,7 +342,7 @@ namespace FritzenSpeech
 
         private void Speech_SpeakProgress(object sender, SpeakProgressEventArgs e)
         {
-
+            Console.WriteLine("teste");
         }
 
         private void Speech_SpeakCompleted(object sender, SpeakCompletedEventArgs e)

@@ -8,7 +8,7 @@ namespace FritzenSpeech
     public class VolumeMixer
     {
 
-        private readonly CoreAudioDevice ca = null;
+        private CoreAudioController cac = null;
         private readonly Dictionary<string, double> volume = new Dictionary<string, double>();
         private bool adjustAudio = true;
 
@@ -19,18 +19,26 @@ namespace FritzenSpeech
 
         public VolumeMixer()
         {
-            ca = new CoreAudioController().DefaultPlaybackDevice;
+            cac = new CoreAudioController();            
         }
 
         public void AdjustVolume()
         {
+            CoreAudioDevice ca = cac.DefaultPlaybackDevice;
+
             if (adjustAudio)
             {
                 string appName = Assembly.GetEntryAssembly().GetName().Name;
 
                 if (ca.State == AudioSwitcher.AudioApi.DeviceState.Active)
                 {
-                    IEnumerable<IAudioSession> sessions = ca.SessionController.ActiveSessions();
+                    IAudioSessionController controller = ca.SessionController;
+                    if (controller == null)
+                    {
+                        cac = new CoreAudioController();
+                        controller = cac.DefaultPlaybackDevice.SessionController;
+                    }
+                    IEnumerable<IAudioSession> sessions = controller.ActiveSessions();
                     foreach (IAudioSession session in sessions)
                     {
                         if (!session.DisplayName.Equals(appName))
@@ -45,13 +53,20 @@ namespace FritzenSpeech
 
         public void RestoreVolume()
         {
+            CoreAudioDevice ca = cac.DefaultPlaybackDevice;
             if (adjustAudio)
             {
                 string appName = Assembly.GetEntryAssembly().GetName().Name;
 
                 if (ca.State == AudioSwitcher.AudioApi.DeviceState.Active)
                 {
-                    IEnumerable<IAudioSession> sessions = ca.SessionController.ActiveSessions();
+                    IAudioSessionController controller = ca.SessionController;
+                    if (controller == null)
+                    {
+                        cac = new CoreAudioController();
+                        controller = cac.DefaultPlaybackDevice.SessionController;
+                    }
+                    IEnumerable<IAudioSession> sessions = controller.ActiveSessions();
                     foreach (IAudioSession session in sessions)
                     {
                         if (!session.DisplayName.Equals(appName))
