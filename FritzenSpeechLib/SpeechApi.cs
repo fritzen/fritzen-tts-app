@@ -17,7 +17,6 @@ namespace FritzenSpeech
     {
         private readonly LanguageDetection languageDetection = new LanguageDetection();
         private readonly FrmMainTray trayAgent = new FrmMainTray();
-        private readonly VolumeMixer mixer = new VolumeMixer();
         private readonly ClipboardBackup clipboardBackup = new ClipboardBackup();
         private SpeechSynthesizer speech = new SpeechSynthesizer();
         private List<VoiceRate> voices = null;
@@ -33,10 +32,7 @@ namespace FritzenSpeech
         private SoundPlayer sound;
 
 
-        public void SetAudioAuto(bool value)
-        {
-            mixer.SetAdjustAudio(value);
-        }
+
         private string CleanUp(string text)
         {
             text = text.Replace(System.Environment.NewLine, " ");
@@ -107,7 +103,6 @@ namespace FritzenSpeech
                 speech.SelectVoice(voices[0].Voice.Name);
             }
 
-            mixer.AdjustVolume();
 
             speech.SpeakAsync(text);
 
@@ -122,7 +117,7 @@ namespace FritzenSpeech
 
         public void SpeakStop()
         {
-            mixer.RestoreVolume();
+
             Prompt p1 = speech.GetCurrentlySpokenPrompt();
             if (p1 != null)
             {
@@ -137,13 +132,12 @@ namespace FritzenSpeech
 
         public void SpeakPause()
         {
-            mixer.RestoreVolume();
+
             speech.Pause();
         }
 
         private void SpeakResume()
         {
-            mixer.AdjustVolume(); //Range from 0 to 100.
             speech.Resume();
         }
         public void SpeakVolume(int volume)
@@ -162,13 +156,9 @@ namespace FritzenSpeech
         {
             sound = new SoundPlayer( Resources.blop );
 
-            //speech.SpeakCompleted += Speech_SpeakCompleted;
             speech.SpeakCompleted += new EventHandler<SpeakCompletedEventArgs>(Speech_SpeakCompleted);
             speech.SpeakProgress += Speech_SpeakProgress;
             
-
-
-
             trayAgent.SpeechActionFired += TrayAgent_SpeechActionFired;
 
             voices = new List<VoiceRate>();
@@ -243,9 +233,6 @@ namespace FritzenSpeech
 
             if (e.Actions == Actions.HOTKEY_FIRED)
             {
-
-                mixer.RestoreVolume();
-
                 string lang = "";
                 string newMD5 = "";
 
@@ -347,7 +334,7 @@ namespace FritzenSpeech
 
         private void Speech_SpeakCompleted(object sender, SpeakCompletedEventArgs e)
         {
-            mixer.RestoreVolume();
+
 
         }
 

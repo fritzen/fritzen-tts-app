@@ -102,7 +102,6 @@
     <Compile Include="SpeechEventArgs.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="VoiceRate.cs" />
-    <Compile Include="VolumeMixer.cs" />
     <EmbeddedResource Include="FrmMainTray.resx">
       <DependentUpon>FrmMainTray.cs</DependentUpon>
     </EmbeddedResource>

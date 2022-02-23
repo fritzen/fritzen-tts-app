@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="setup_audio_mixer" xml:space="preserve">
-    <value>Reduzir outros sons do sistema quando este App começar a falar</value>
-  </data>
-  <data name="setup_audio_mixer_help" xml:space="preserve">
-    <value>[Atenção] Caso este App trave, os demais sons do sistema continuarão reduzidos</value>
-  </data>
   <data name="setup_flags" xml:space="preserve">
     <value>Opções:</value>
   </data>

@@ -37,11 +37,6 @@ namespace FritzenSpeechApp
 
             api.SetHotkeys(Properties.Settings.Default.ShortcutIndex);
 
-            api.SetAudioAuto(Properties.Settings.Default.IsReduceSound);
-
-
-
-            cbTryAdjustMixer.IsChecked = Properties.Settings.Default.IsReduceSound;
 
 
         }
@@ -94,14 +89,6 @@ namespace FritzenSpeechApp
 
         }
 
-
-
-        private void CbTryAdjustMixer_Click(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.IsReduceSound = (bool)cbTryAdjustMixer.IsChecked;
-            Properties.Settings.Default.Save();
-            api.SetAudioAuto(Properties.Settings.Default.IsReduceSound);
-        }
 
         private void CmdPaypal_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {

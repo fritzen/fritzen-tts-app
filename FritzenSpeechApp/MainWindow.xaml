@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FritzenSpeechApp"
         xmlns:loc="clr-namespace:FritzenSpeechApp.Lang"
         mc:Ignorable="d"
-        Title="Fritzen Speech 1.0 [beta]" Height="750" Width="1600" Icon="Images/icon.png" Closing="Window_Closing" Loaded="Window_Loaded">
+        Title="Fritzen Speech 1.1" Height="750" Width="1600" Icon="Images/icon.png" Closing="Window_Closing" Loaded="Window_Loaded">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar>

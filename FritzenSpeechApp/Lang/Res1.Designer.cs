@@ -19,7 +19,7 @@ namespace FritzenSpeechApp.Lang {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Res {
@@ -57,24 +57,6 @@ namespace FritzenSpeechApp.Lang {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reduce other sounds when spoking.
-        /// </summary>
-        public static string setup_audio_mixer {
-            get {
-                return ResourceManager.GetString("setup_audio_mixer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Warn] If this app craches, system audio is manteined reduced.
-        /// </summary>
-        public static string setup_audio_mixer_help {
-            get {
-                return ResourceManager.GetString("setup_audio_mixer_help", resourceCulture);
             }
         }
         
