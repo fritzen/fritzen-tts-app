@@ -28,7 +28,7 @@ namespace FritzenSpeechApp
             }
             else
             {
-                MessageBox.Show("only one instance at a time");
+                MessageBox.Show("Only one instance at a time. Click OK to quit.", "Fritzen Speech" , MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
             }
 
         }
